@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "settings": 1264,
+  "settings": 1267,
   "anchorRoutes": {
     "add_http_cors_header": "/reference/settings/session-settings/other",
     "additional_result_filter": "/reference/settings/session-settings/additional",
@@ -313,6 +313,7 @@
     "distributed_cache_log_mode": "/reference/settings/session-settings/distributed-cache",
     "distributed_cache_max_unacked_inflight_packets": "/reference/settings/session-settings/distributed-cache",
     "distributed_cache_min_bytes_for_seek": "/reference/settings/session-settings/distributed-cache",
+    "distributed_cache_min_inflight_bytes_to_discard_connection_on_seek": "/reference/settings/session-settings/distributed-cache",
     "distributed_cache_pool_behaviour_on_limit": "/reference/settings/session-settings/distributed-cache",
     "distributed_cache_prefer_bigger_buffer_size": "/reference/settings/session-settings/distributed-cache",
     "distributed_cache_read_only_from_current_az": "/reference/settings/session-settings/distributed-cache",
@@ -389,7 +390,8 @@
     "enable_optimize_predicate_expression": "/reference/settings/session-settings/enable-optimize-predicate-expression",
     "enable_optimize_predicate_expression_to_final_subquery": "/reference/settings/session-settings/enable-optimize-predicate-expression",
     "enable_order_by_all": "/reference/settings/session-settings/enable",
-    "enable_parallel_blocks_marshalling": "/reference/settings/session-settings/enable",
+    "enable_parallel_blocks_marshalling": "/reference/settings/session-settings/enable-parallel",
+    "enable_parallel_single_level_merge": "/reference/settings/session-settings/enable-parallel",
     "enable_parsing_to_custom_serialization": "/reference/settings/session-settings/enable",
     "enable_positional_arguments": "/reference/settings/session-settings/enable-positional-arguments",
     "enable_positional_arguments_for_projections": "/reference/settings/session-settings/enable-positional-arguments",
@@ -1232,6 +1234,7 @@
     "use_partition_minmax_for_primary_key_pruning": "/reference/settings/session-settings/use-partition",
     "use_partition_pruning": "/reference/settings/session-settings/use-partition",
     "use_primary_key": "/reference/settings/session-settings/use",
+    "use_projection_index_in_read_pools": "/reference/settings/session-settings/use",
     "use_query_cache": "/reference/settings/session-settings/use-query",
     "use_query_condition_cache": "/reference/settings/session-settings/use-query",
     "use_reader_executor": "/reference/settings/session-settings/use",
@@ -1616,6 +1619,11 @@
       "prefix": "distributed_ddl",
       "mode": "token",
       "target": "/reference/settings/session-settings/distributed-ddl"
+    },
+    {
+      "prefix": "enable_parallel",
+      "mode": "token",
+      "target": "/reference/settings/session-settings/enable-parallel"
     },
     {
       "prefix": "enable_software",
@@ -2628,6 +2636,7 @@
     "/reference/settings/session-settings/enable-join",
     "/reference/settings/session-settings/enable-lightweight",
     "/reference/settings/session-settings/enable-optimize-predicate-expression",
+    "/reference/settings/session-settings/enable-parallel",
     "/reference/settings/session-settings/enable-positional-arguments",
     "/reference/settings/session-settings/enable-software",
     "/reference/settings/session-settings/engine-file",
@@ -2848,7 +2857,7 @@
       "path": "/reference/settings/session-settings/allow",
       "label": "allow_*",
       "settings": 35,
-      "characters": 20082
+      "characters": 20196
     },
     {
       "path": "/reference/settings/session-settings/allow-deprecated",
@@ -3129,8 +3138,8 @@
     {
       "path": "/reference/settings/session-settings/distributed-cache",
       "label": "distributed_cache_*",
-      "settings": 28,
-      "characters": 12357
+      "settings": 29,
+      "characters": 13374
     },
     {
       "path": "/reference/settings/session-settings/distributed-ddl",
@@ -3142,7 +3151,7 @@
       "path": "/reference/settings/session-settings/distributed-index-analysis",
       "label": "distributed_index_analysis_*",
       "settings": 3,
-      "characters": 1862
+      "characters": 1898
     },
     {
       "path": "/reference/settings/session-settings/distributed-plan",
@@ -3171,8 +3180,8 @@
     {
       "path": "/reference/settings/session-settings/enable",
       "label": "enable_*",
-      "settings": 33,
-      "characters": 19918
+      "settings": 32,
+      "characters": 19456
     },
     {
       "path": "/reference/settings/session-settings/enable-blob-storage-log",
@@ -3203,6 +3212,12 @@
       "label": "enable_optimize_predicate_expression_*",
       "settings": 2,
       "characters": 1218
+    },
+    {
+      "path": "/reference/settings/session-settings/enable-parallel",
+      "label": "enable_parallel_*",
+      "settings": 2,
+      "characters": 1409
     },
     {
       "path": "/reference/settings/session-settings/enable-positional-arguments",
@@ -3370,7 +3385,7 @@
       "path": "/reference/settings/session-settings/ignore",
       "label": "ignore_*",
       "settings": 5,
-      "characters": 4076
+      "characters": 4101
     },
     {
       "path": "/reference/settings/session-settings/ignore-on",
@@ -3388,7 +3403,7 @@
       "path": "/reference/settings/session-settings/insert",
       "label": "insert_*",
       "settings": 5,
-      "characters": 5102
+      "characters": 5242
     },
     {
       "path": "/reference/settings/session-settings/insert-keeper",
@@ -3418,7 +3433,7 @@
       "path": "/reference/settings/session-settings/join",
       "label": "join_*",
       "settings": 7,
-      "characters": 8475
+      "characters": 8514
     },
     {
       "path": "/reference/settings/session-settings/join-runtime",
@@ -3484,13 +3499,13 @@
       "path": "/reference/settings/session-settings/log-queries",
       "label": "log_queries_*",
       "settings": 5,
-      "characters": 2525
+      "characters": 2531
     },
     {
       "path": "/reference/settings/session-settings/log-query",
       "label": "log_query_*",
       "settings": 3,
-      "characters": 1180
+      "characters": 1192
     },
     {
       "path": "/reference/settings/session-settings/low-cardinality",
@@ -3502,7 +3517,7 @@
       "path": "/reference/settings/session-settings/materialize",
       "label": "materialize_*",
       "settings": 3,
-      "characters": 1462
+      "characters": 1474
     },
     {
       "path": "/reference/settings/session-settings/materialized-views",
@@ -3514,7 +3529,7 @@
       "path": "/reference/settings/session-settings/max",
       "label": "max_*",
       "settings": 29,
-      "characters": 14920
+      "characters": 14940
     },
     {
       "path": "/reference/settings/session-settings/max-ast",
@@ -3526,13 +3541,13 @@
       "path": "/reference/settings/session-settings/max-bytes",
       "label": "max_bytes_*",
       "settings": 15,
-      "characters": 9136
+      "characters": 9146
     },
     {
       "path": "/reference/settings/session-settings/max-concurrent",
       "label": "max_concurrent_*",
       "settings": 2,
-      "characters": 1181
+      "characters": 1196
     },
     {
       "path": "/reference/settings/session-settings/max-distributed",
@@ -3550,7 +3565,7 @@
       "path": "/reference/settings/session-settings/max-execution",
       "label": "max_execution_*",
       "settings": 4,
-      "characters": 2974
+      "characters": 2992
     },
     {
       "path": "/reference/settings/session-settings/max-hyperscan",
@@ -3562,7 +3577,7 @@
       "path": "/reference/settings/session-settings/max-insert",
       "label": "max_insert_*",
       "settings": 5,
-      "characters": 3916
+      "characters": 5029
     },
     {
       "path": "/reference/settings/session-settings/max-joined",
@@ -3580,7 +3595,7 @@
       "path": "/reference/settings/session-settings/max-memory-usage",
       "label": "max_memory_usage_*",
       "settings": 2,
-      "characters": 1824
+      "characters": 1882
     },
     {
       "path": "/reference/settings/session-settings/max-network",
@@ -3598,7 +3613,7 @@
       "path": "/reference/settings/session-settings/max-partitions",
       "label": "max_partitions_*",
       "settings": 2,
-      "characters": 2122
+      "characters": 2137
     },
     {
       "path": "/reference/settings/session-settings/max-rand",
@@ -3628,7 +3643,7 @@
       "path": "/reference/settings/session-settings/max-rows",
       "label": "max_rows_*",
       "settings": 10,
-      "characters": 4442
+      "characters": 4452
     },
     {
       "path": "/reference/settings/session-settings/max-size",
@@ -3658,7 +3673,7 @@
       "path": "/reference/settings/session-settings/max-threads",
       "label": "max_threads_*",
       "settings": 3,
-      "characters": 2968
+      "characters": 2984
     },
     {
       "path": "/reference/settings/session-settings/memory",
@@ -3682,7 +3697,7 @@
       "path": "/reference/settings/session-settings/merge-tree",
       "label": "merge_tree_*",
       "settings": 20,
-      "characters": 11180
+      "characters": 11218
     },
     {
       "path": "/reference/settings/session-settings/metrics-perf",
@@ -3712,7 +3727,7 @@
       "path": "/reference/settings/session-settings/min-execution-speed",
       "label": "min_execution_speed_*",
       "settings": 2,
-      "characters": 752
+      "characters": 764
     },
     {
       "path": "/reference/settings/session-settings/min-external",
@@ -3910,7 +3925,7 @@
       "path": "/reference/settings/session-settings/parallel-replicas",
       "label": "parallel_replicas_*",
       "settings": 22,
-      "characters": 12456
+      "characters": 12254
     },
     {
       "path": "/reference/settings/session-settings/parsedatetime",
@@ -3940,7 +3955,7 @@
       "path": "/reference/settings/session-settings/prefer",
       "label": "prefer_*",
       "settings": 5,
-      "characters": 4543
+      "characters": 4568
     },
     {
       "path": "/reference/settings/session-settings/preferred",
@@ -4192,7 +4207,7 @@
       "path": "/reference/settings/session-settings/throw-on",
       "label": "throw_on_*",
       "settings": 3,
-      "characters": 1093
+      "characters": 1108
     },
     {
       "path": "/reference/settings/session-settings/timeout-overflow-mode",
@@ -4233,8 +4248,8 @@
     {
       "path": "/reference/settings/session-settings/use",
       "label": "use_*",
-      "settings": 21,
-      "characters": 13972
+      "settings": 22,
+      "characters": 14994
     },
     {
       "path": "/reference/settings/session-settings/use-iceberg",
@@ -4342,7 +4357,7 @@
       "path": "/reference/settings/session-settings/other",
       "label": "Other",
       "settings": 120,
-      "characters": 62969
+      "characters": 63051
     }
   ]
 }

@@ -878,6 +878,13 @@ Used to regulate how resources are utilized and shared between mutations and oth
 **See Also**
 - [Workload Scheduling](/concepts/features/configuration/server-config/workload-scheduling)
 
+## named_collections_storage.type {#named_collections_storage.type}
+
+<SettingsInfoBlock type="String" default_value="local" changeable_without_restart="No" />
+The storage type for named collections. Possible values are `local`, `local_encrypted`, `keeper`,
+`keeper_encrypted`, `zookeeper`, and `zookeeper_encrypted`.
+Configured as `named_collections_storage.type` (`<named_collections_storage><type>` in XML).
+
 ## oom_score {#oom_score}
 
 <SettingsInfoBlock type="Int32" default_value="0" changeable_without_restart="No" />On Linux systems this can control the behavior of OOM killer.

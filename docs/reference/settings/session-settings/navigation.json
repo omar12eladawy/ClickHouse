@@ -67,6 +67,7 @@
     "reference/settings/session-settings/enable-join",
     "reference/settings/session-settings/enable-lightweight",
     "reference/settings/session-settings/enable-optimize-predicate-expression",
+    "reference/settings/session-settings/enable-parallel",
     "reference/settings/session-settings/enable-positional-arguments",
     "reference/settings/session-settings/enable-software",
     "reference/settings/session-settings/engine-file",

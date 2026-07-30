@@ -1,6 +1,6 @@
 {
   "version": 6,
-  "settings": 295,
+  "settings": 296,
   "anchorRoutes": {
     "allow_special_bool_values_inside_variant": "/reference/settings/formats/other",
     "bool_false_representation": "/reference/settings/formats/bool",
@@ -155,6 +155,7 @@
     "input_format_protobuf_flatten_google_wrappers": "/reference/settings/formats/input-format",
     "input_format_protobuf_oneof_presence": "/reference/settings/formats/input-format",
     "input_format_protobuf_skip_fields_with_unsupported_types_in_schema_inference": "/reference/settings/formats/input-format",
+    "input_format_read_datetime_number_as_raw_value": "/reference/settings/formats/input-format",
     "input_format_record_errors_file_path": "/reference/settings/formats/input-format",
     "input_format_skip_unknown_fields": "/reference/settings/formats/input-format",
     "input_format_try_infer_dates": "/reference/settings/formats/input-format",
@@ -427,7 +428,7 @@
       "path": "/reference/settings/formats/format",
       "label": "format_*",
       "settings": 5,
-      "characters": 3101
+      "characters": 3107
     },
     {
       "path": "/reference/settings/formats/format-avro",
@@ -480,8 +481,8 @@
     {
       "path": "/reference/settings/formats/input-format",
       "label": "input_format_*",
-      "settings": 125,
-      "characters": 55714
+      "settings": 126,
+      "characters": 58134
     },
     {
       "path": "/reference/settings/formats/output-format",
